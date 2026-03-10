@@ -2,8 +2,10 @@
   "manifest_version": 3,
   "name": "AI Context Injector",
   "version": "1.0",
-  "description": "Inject project context into AI prompts",
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["storage", "contextMenus", "activeTab"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "popup.html"
   },

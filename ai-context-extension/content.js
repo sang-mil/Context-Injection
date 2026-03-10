@@ -69,20 +69,6 @@ input.value = prompt + input.value
 
 }
 
-function findInputBox(){
-
-let input = document.querySelector("textarea")
-
-if(input) return input
-
-input = document.querySelector('[contenteditable="true"]')
-
-if(input) return input
-
-return null
-
-}
-
 function init(){
 
 createFloatingButton()
@@ -90,4 +76,23 @@ createFloatingButton()
 }
 
 init()
+
+chrome.runtime.onMessage.addListener((msg)=>{
+
+if(msg.action === "injectContext"){
+
+const input = document.querySelector("textarea")
+
+if(!input) return
+
+input.value = `[REFERENCE]
+
+${msg.text}
+
+` + input.value
+
+}
+
+})
+
 
