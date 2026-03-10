@@ -12,18 +12,34 @@ return null
 
 }
 
-function createInjectButton(input){
+function createFloatingButton(){
+
+if(document.getElementById("context-inject-btn")) return
 
 const btn = document.createElement("button")
 
+btn.id = "context-inject-btn"
+
 btn.innerText = "⚡ 맥락 주입"
 
-btn.style.marginTop = "8px"
-btn.style.padding = "6px"
+btn.style.position = "fixed"
+btn.style.bottom = "120px"
+btn.style.left = "50%"
+btn.style.transform = "translateX(-50%)"
 
-input.parentNode.appendChild(btn)
+btn.style.zIndex = "9999"
+btn.style.padding = "10px 16px"
+btn.style.borderRadius = "8px"
+
+btn.style.background = "#10a37f"
+btn.style.color = "white"
+btn.style.border = "none"
+
+btn.style.cursor = "pointer"
 
 btn.onclick = injectContext
+
+document.body.appendChild(btn)
 
 }
 
@@ -53,20 +69,25 @@ input.value = prompt + input.value
 
 }
 
-function init(){
+function findInputBox(){
 
-const input = findInputBox()
+let input = document.querySelector("textarea")
 
-if(input){
+if(input) return input
 
-createInjectButton(input)
+input = document.querySelector('[contenteditable="true"]')
 
-}else{
+if(input) return input
 
-setTimeout(init,1000)
+return null
 
 }
+
+function init(){
+
+createFloatingButton()
 
 }
 
 init()
+
