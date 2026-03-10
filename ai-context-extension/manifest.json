@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "AI Context Injector",
+  "version": "1.0",
+  "description": "Inject project context into AI prompts",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}
